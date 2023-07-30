@@ -1,0 +1,67 @@
+# This file could be used for testing the API with Visual Studio Code
+
+## Execute Log In
+POST http://localhost:3000/api/sessions HTTP/1.1
+content-type: application/json
+
+{
+    "username": "user1@example.com",
+    "password": "password"
+}
+###
+
+## Checking if user is still logged-in.
+GET http://localhost:3000/api/sessions/current HTTP/1.1
+###
+
+## Execute Log Out.
+DELETE http://localhost:3000/api/sessions/current HTTP/1.1
+###
+
+
+
+
+##Retrieve all the seats for plane
+
+GET http://localhost:3000/api/seats/1
+
+## Make a booking for a plane 
+###
+PUT /api/seats/1 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+    "seats": [
+        { "seat_id": "IR1C5" },
+        { "seat_id": "IR1C1" }
+    ]
+}
+
+##Get booking for a user
+###
+GET http://localhost:3000/api/seats/user/2    
+Content-Type: application/json
+
+## Delete booking for a user
+## we will do it using update the seat to available and the user_id to null
+###
+//info from user should not be in the api http
+//the server already knows the user_id
+PUT http://localhost:3000/api/seats/user/delete/1  HTTP/1.1
+Content-Type: application/json
+
+## Make a number of random bookings 
+###
+PUT http://localhost:3000/api/random 
+Content-Type: application/json
+
+{
+    "plane_id": "1",
+    "number": "3"
+}
+
+## Get number of available seats for a plane
+###
+GET http://localhost:3000/api/seats/available/1
+
